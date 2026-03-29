@@ -98,7 +98,7 @@
   </div>
 
   <script>
-    fetch("https://gist.githubusercontent.com/YOUR_USERNAME/YOUR_GIST_ID/raw/config.json?cachebust=" + Date.now())
+    fetch("https://gist.github.com/Voltix-Enterprises/8dd04e3db9db5384e011cb7bf2111743/raw/config.json?cachebust=" + Date.now())
       .then(r => r.json())
       .then(data => {
         if (data.online === "false") {
