@@ -56,7 +56,7 @@
       background: #222;
     }
 
-    /* --- Overlay --- */
+    /* Overlay */
     #overlay {
       position: fixed;
       top: 0;
@@ -76,6 +76,22 @@
       max-width: 400px;
       padding: 2rem;
     }
+
+    #redirectBtn {
+      margin-top: 1.5rem;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      background: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #redirectBtn:hover {
+      background: #005fa3;
+    }
   </style>
 </head>
 
@@ -84,8 +100,9 @@
   <!-- Overlay (hidden by default) -->
   <div id="overlay">
     <div class="overlay-content">
-      <h2>Redirecting…</h2>
-      <p>You are being redirected to the alternate host.</p>
+      <h2>Site Redirect</h2>
+      <p>The site is currently being served from the alternate host.</p>
+      <button id="redirectBtn">Go to Alternate Site</button>
     </div>
   </div>
 
@@ -98,12 +115,15 @@
   </div>
 
   <script>
-    fetch("https://gist.github.com/Voltix-Enterprises/8dd04e3db9db5384e011cb7bf2111743/raw/config.json?cachebust=" + Date.now())
+    fetch("https://gist.githubusercontent.com/Voltix-Enterprises/8dd04e3db9db5384e011cb7bf2111743/raw/config.json?cachebust=" + Date.now())
       .then(r => r.json())
       .then(data => {
         if (data.online === "false") {
           document.getElementById("overlay").style.display = "flex";
-          window.location.href = "https://your.infinityfreeapp.com/";
+
+          document.getElementById("redirectBtn").onclick = () => {
+            window.location.href = "https://your.infinityfreeapp.com/";
+          };
         }
       })
       .catch(err => console.error("Config fetch failed:", err));
